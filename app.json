@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Kawai To Do",
+    "name": "Kawai-todo-test",
     "description": "Kawai To Do App made with React Native",
     "slug": "kawai-todo-reactnative",
     "privacy": "public",
@@ -20,6 +20,7 @@
       "package": "com.kwon770.sckwon"
     },
     "ios": {
+      "bundleIdentifier": "com.kwon770.sckwon",
       "supportsTablet": true
     }
   }

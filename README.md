@@ -100,7 +100,7 @@ when the ui occur event, this event propagate event to related event
 
 _From this project, button [\<TouchableOpacity>] propagte event to scrollView_
 
-To prevent this, ```event.stopPropagation()``` must be written
+To prevent this, `event.stopPropagation()` must be written
 
 ```js
 render() {
@@ -110,7 +110,7 @@ render() {
                 event.stopPropagation();
                 deleteToDo(id);
               }}>
-              
+
               ~~~
 
   </TouchableOpacity>
@@ -123,23 +123,23 @@ render() {
 
 When the app operate first, the problem can be occured during load proccess
 
-Because there is no key (data key) on first operation, ```AsyncStorage.getItem("key")```  return null or undefinded
+Because there is no key (data key) on first operation, `AsyncStorage.getItem("key")` return null or undefinded
 
 so you must prevent this exceoption
 
 ```js
 _loadToDos = async () => {
-    try {
-      const toDos = await AsyncStorage.getItem("toDos"); // Error is occured on first operation
-      const parsedToDos = JSON.parse(toDos);
-      this.setState({
-        loadedToDos: true,
-        toDos: parsedToDos || {} // To prevent error, when loading data is null, return {}
-      });
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  try {
+    const toDos = await AsyncStorage.getItem("toDos"); // Error is occured on first operation
+    const parsedToDos = JSON.parse(toDos);
+    this.setState({
+      loadedToDos: true,
+      toDos: parsedToDos || {} // To prevent error, when loading data is null, return {}
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
 ```
 
 ### 8. Setting app.json to publish by expo
@@ -152,6 +152,7 @@ android package must be written in app.json
 },
 
 "ios": {
+  "bundleIdentifier": "com.kwon770.sckwon",
   "supportsTablet": true
 }
 ```
