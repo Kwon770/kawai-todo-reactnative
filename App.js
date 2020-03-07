@@ -69,10 +69,17 @@ class App extends React.Component {
       newToDo: text
     });
   };
-  _loadToDos = () => {
-    this.setState({
-      loadedToDos: true
-    });
+  _loadToDos = async () => {
+    try {
+      const toDos = await AsyncStorage.getItem("toDos");
+      const parsedToDos = JSON.parse(toDos);
+      this.setState({
+        loadedToDos: true,
+        toDos: parsedToDos
+      });
+    } catch (err) {
+      console.log(err);
+    }
   };
   _addToDo = () => {
     const { newToDo } = this.state;
@@ -107,7 +114,7 @@ class App extends React.Component {
     this.setState(prevState => {
       // {} Object is reference type
       delete prevState.toDos[id];
-      this._saveToDos(newState.toDos);
+      this._saveToDos(prevState.toDos);
       return { ...prevState };
     });
   };
