@@ -96,13 +96,9 @@ class App extends React.Component {
   };
   _deleteToDo = id => {
     this.setState(prevState => {
-      const toDos = prevState.toDos;
-      delete toDos[id];
-      const newState = {
-        ...prevState,
-        ...toDos
-      };
-      return { ...newState };
+      // {} Object is reference type
+      delete prevState.toDos[id];
+      return { ...prevState };
     });
   };
 }
