@@ -7,7 +7,8 @@ import {
   TextInput,
   Dimensions,
   Platform,
-  ScrollView
+  ScrollView,
+  AsyncStorage
 } from "react-native";
 import { AppLoading } from "expo";
 import ToDo from "./ToDo";
@@ -97,6 +98,7 @@ class App extends React.Component {
             ...newToDoObj
           }
         };
+        this._saveToDos(newState.toDos);
         return { ...newState };
       });
     }
@@ -105,6 +107,7 @@ class App extends React.Component {
     this.setState(prevState => {
       // {} Object is reference type
       delete prevState.toDos[id];
+      this._saveToDos(newState.toDos);
       return { ...prevState };
     });
   };
@@ -120,6 +123,7 @@ class App extends React.Component {
           }
         }
       };
+      this._saveToDos(newState.toDos);
       return { ...newState };
     });
   };
@@ -135,6 +139,7 @@ class App extends React.Component {
           }
         }
       };
+      this._saveToDos(newState.toDos);
       return { ...newState };
     });
   };
@@ -151,9 +156,13 @@ class App extends React.Component {
             }
           }
         };
+        this._saveToDos(newState.toDos);
         return { ...newState };
       });
     });
+  };
+  _saveToDos = newToDos => {
+    const saveToDos = AsyncStorage.setItem("toDos", JSON.stringify(newToDos));
   };
 }
 
