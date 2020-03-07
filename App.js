@@ -21,7 +21,14 @@ class App extends React.Component {
   state = {
     newToDo: "",
     loadedToDos: false,
-    toDos: {}
+    toDos: {
+      "1": {
+        id: "1",
+        isCompleted: false,
+        text: "To Do",
+        createdAt: "1"
+      }
+    }
   };
 
   componentDidMount = () => {
