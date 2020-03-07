@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { AppLoading } from "expo";
 import ToDo from "./ToDo";
+import uuid from "react-native-uuid";
 
 const { height, width } = Dimensions.get("window");
 
@@ -42,6 +43,7 @@ class App extends React.Component {
             onChangeText={this._controllNewToDo}
             returnKeyType={"done"}
             autoCorrect={false}
+            onSubmitEditing={this._addToDo}
           />
           <ScrollView contentContainerStyle={styles.toDos}></ScrollView>
         </View>
@@ -53,7 +55,40 @@ class App extends React.Component {
       newToDo: text
     });
   };
-  _loadToDos = () => {};
+  _loadToDos = () => {
+    this.setState({
+      loadedToDos: true
+    });
+  };
+  _addToDo = () => {
+    const { newToDo } = this.state;
+    if (newToDo !== "") {
+      // prevState is the argument passed to setstate callback function
+      // it is the value of state before the setState was triggered by React
+      this.setState(prevState => {
+        const ID = uuid.v1();
+        const newToDoObj = {
+          // variable name => [variable] : {} // string name => "string" : {}
+          [ID]: {
+            id: ID,
+            isCompleted: false,
+            text: newToDo,
+            createdAt: Date.now()
+          }
+        };
+        const newState = {
+          ...prevState,
+          newToDo: "",
+          toDos: {
+            ...prevState.toDos,
+            ...newToDoObj
+          }
+        };
+        console.log(prevState);
+        return { ...newState };
+      });
+    }
+  };
 }
 
 const styles = StyleSheet.create({
