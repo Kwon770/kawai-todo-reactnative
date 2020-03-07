@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { AppLoading } from "expo";
 import ToDo from "./ToDo";
+// Use 'react-native-uuid' from React Native, instead of 'uuid'
 import uuid from "react-native-uuid";
 
 const { height, width } = Dimensions.get("window");
@@ -18,7 +19,8 @@ const { height, width } = Dimensions.get("window");
 class App extends React.Component {
   state = {
     newToDo: "",
-    loadedToDos: false
+    loadedToDos: false,
+    toDos: {}
   };
 
   componentDidMount = () => {
@@ -26,7 +28,7 @@ class App extends React.Component {
   };
 
   render() {
-    const { newToDo, loadedToDos } = this.state;
+    const { newToDo, loadedToDos, toDos } = this.state;
     if (!loadedToDos) {
       return <AppLoading />;
     }
@@ -45,7 +47,11 @@ class App extends React.Component {
             autoCorrect={false}
             onSubmitEditing={this._addToDo}
           />
-          <ScrollView contentContainerStyle={styles.toDos}></ScrollView>
+          <ScrollView contentContainerStyle={styles.toDos}>
+            {Object.values(toDos).map(toDo => (
+              <ToDo key={toDo.id} {...toDo} deleteToDo={this._deleteToDo} />
+            ))}
+          </ScrollView>
         </View>
       </View>
     );
@@ -84,10 +90,20 @@ class App extends React.Component {
             ...newToDoObj
           }
         };
-        console.log(prevState);
         return { ...newState };
       });
     }
+  };
+  _deleteToDo = id => {
+    this.setState(prevState => {
+      const toDos = prevState.toDos;
+      delete toDos[id];
+      const newState = {
+        ...prevState,
+        ...toDos
+      };
+      return { ...newState };
+    });
   };
 }
 
