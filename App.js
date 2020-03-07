@@ -34,7 +34,7 @@ class App extends React.Component {
             autoCorrect={false}
           />
           <ScrollView contentContainerStyle={styles.toDos}>
-            <ToDo />
+            <ToDo text={"HHELLO"} />
           </ScrollView>
         </View>
       </View>
