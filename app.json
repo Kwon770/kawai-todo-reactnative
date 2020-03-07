@@ -16,6 +16,9 @@
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": ["**/*"],
+    "android": {
+      "package": "com.kwon770.sckwon"
+    },
     "ios": {
       "supportsTablet": true
     }

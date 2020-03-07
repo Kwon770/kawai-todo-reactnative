@@ -21,14 +21,7 @@ class App extends React.Component {
   state = {
     newToDo: "",
     loadedToDos: false,
-    toDos: {
-      "1": {
-        id: "1",
-        isCompleted: false,
-        text: "To Do",
-        createdAt: "1"
-      }
-    }
+    toDos: {}
   };
 
   componentDidMount = () => {
@@ -54,6 +47,7 @@ class App extends React.Component {
             returnKeyType={"done"}
             autoCorrect={false}
             onSubmitEditing={this._addToDo}
+            underlineColorAndroid={"transparent"}
           />
           <ScrollView contentContainerStyle={styles.toDos}>
             {Object.values(toDos).map(toDo => (
@@ -82,7 +76,7 @@ class App extends React.Component {
       const parsedToDos = JSON.parse(toDos);
       this.setState({
         loadedToDos: true,
-        toDos: parsedToDos
+        toDos: parsedToDos || {}
       });
     } catch (err) {
       console.log(err);
@@ -176,7 +170,7 @@ class App extends React.Component {
     });
   };
   _saveToDos = newToDos => {
-    const saveToDos = AsyncStorage.setItem("toDos", JSON.stringify(newToDos));
+    AsyncStorage.setItem("toDos", JSON.stringify(newToDos));
   };
 }
 
