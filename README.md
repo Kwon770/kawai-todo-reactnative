@@ -1,14 +1,14 @@
-# Kawai To Do
+# Kawai ToDo
 
-Kawai To Do App made with React Native
+Kawai ToDo App made with React Native
 
-## The things what i learn
+## The things what I learn
 
 ### 1. react-native-uuid
 
 Use **'react-native-uuid'** from Reactnative, instead of 'uuid'
 
-'uuid' isn't recognized (tested on Expo)
+'UUID' isn't recognized (tested on Expo)
 
 ```js
 $ yarn add react-native-uuid
@@ -23,7 +23,7 @@ const ID = uuid.v1();
 
 **prevState** is the argument passed to `setState` callback function
 
-It it the value of state before `setState` was triggered by React
+It is the value of the state before `setState` was triggered by React
 
 ```js
 _deleteToDo = id => {
@@ -34,7 +34,7 @@ _deleteToDo = id => {
 };
 ```
 
-### 3. bject name with variable or string
+### 3. object name with variable or string
 
 - \[variable]: {}
 - "string": {}
@@ -66,7 +66,7 @@ delete temp["a"];
 console.log(obj); // {}
 ```
 
-### 5. Auto overwrite from object
+### 5. Auto overwrite from the object
 
 if there is overlapping code, the code below is overlapping
 
@@ -96,9 +96,9 @@ _uncompleteToDo = id => {
 
 ### 6. Ui propagation(전파) problem
 
-when the ui occur event, this event propagate event to related event
+when the UI occur event, this event propagate event to related event
 
-_From this project, button [\<TouchableOpacity>] propagte event to scrollView_
+_From this project, button [\<TouchableOpacity>] propagate the event to scrollView_
 
 To prevent this, `event.stopPropagation()` must be written
 
@@ -119,13 +119,13 @@ render() {
 }
 ```
 
-### 7. The error what can be occured during loading save-data
+### 7. The error what can be occurred during loading save-data
 
-When the app operate first, the problem can be occured during load proccess
+When the app operate first, the problem can occur during the loading process
 
 Because there is no key (data key) on first operation, `AsyncStorage.getItem("key")` return null or undefinded
 
-so you must prevent this exceoption
+so you must prevent this exception
 
 ```js
 _loadToDos = async () => {
@@ -142,7 +142,7 @@ _loadToDos = async () => {
 };
 ```
 
-### 8. Setting app.json to publish by expo
+### 8. Setting app.json to publish by Expo
 
 android package must be written in app.json
 
